@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hobby | Netflix Style</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    body {
+        background-color: #141414; color: white; margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    header {
+        position: fixed; top: 0; width: 100%; padding: 20px 40px;
+        display: flex; align-items: center; justify-content: space-between;
+        background-color: #141414; z-index: 1000;
+    }
+    .logo { color: #e50914; font-size: 28px; font-weight: bold; text-decoration: none; }
+    nav ul { display: flex; list-style: none; }
+    nav ul li { margin-left: 20px; }
+    nav ul li a { color: white; text-decoration: none; }
+    nav ul li a:hover { color: #e50914; }
+    .hobby-header {
+        margin-top: 100px; padding: 20px 40px; font-size: 28px; font-weight: bold;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+        padding: 20px 40px;
+    }
+    .book-card {
+        background: #181818; border-radius: 6px; overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer; text-align: center;
+        opacity: 0; transform: translateY(20px);
+        animation: fadeInUp 0.5s ease forwards;
+    }
+    .book-card img {
+        width: 100%; height: 200px; object-fit: cover;
+    }
+    .book-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.7);
+    }
+    .book-title { font-size: 16px; font-weight: bold; margin-top: 10px; }
+    .book-subtitle { font-size: 14px; color: #d2d2d2; margin-bottom: 10px; }
+    
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 1024px) {
+        .grid-container { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+        .grid-container { grid-template-columns: repeat(2, 1fr); }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">MANDY</a>
+</header>
+
+<div class="hobby-header" id="hobbyTitle">Loading...</div>
+
+<div class="grid-container" id="bookGrid">
+    <!-- Books will be inserted dynamically -->
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const hobbyName = params.get('name') || 'My Completed Reads!!!';
+document.getElementById('hobbyTitle').textContent = hobbyName;
+
+// Example Books Data
+const books = [
+    { img: 'Images/Cambridge.jpg', title: 'Cambridge', subtitle: 'England, UK' },
+    { img: 'Images/Scotland.jpg', title: 'Edinburgh', subtitle: 'Scotland, UK' },
+    { img: 'Images/London.jpg', title: 'London', subtitle: 'England UK' },
+    { img: 'Images/Cornwall.jpg', title: 'Cornwall', subtitle: 'England, UK' },
+    { img: 'Images/Next.jpg', title: 'Coming Soon', subtitle: '' }
+    // { img: 'Images/Revolution.png', title: 'Revolution 2020', subtitle: 'Chetan Bhagat' },
+    // { img: 'Images/3Mistakes.png', title: '3 Mistakes of My Life', subtitle: 'Chetan Bhagat' },
+    // { img: 'Images/RoomNo105.jpg', title: 'The Girl in Room No 105', subtitle: 'Chetan Bhagat' },
+    // { img: 'Images/HalfGF.jpg', title: 'Half Girlfriend', subtitle: 'Chetan Bhagat' },
+    // { img: 'Images/OneNight.jpg', title: 'One Night @ call centre', subtitle: 'Chetan Bhagat' },
+    // { img: 'Images/CR.png', title: 'Chidambara Rahasya', subtitle: 'KP Poornachandra Tejaswi' },
+    // { img: 'Images/JC.png', title: 'Jugari Cross', subtitle: 'KP Poornachandra Tejaswi' },
+    // { img: 'Images/Karvalo.jpg', title: 'Karvalo', subtitle: 'KP Poornachandra Tejaswi' },
+    // { img: 'Images/Next.jpg', title: 'Coming soon', subtitle: '' }
+];
+
+const bookGrid = document.getElementById('bookGrid');
+
+books.forEach((book, index) => {
+    const div = document.createElement('div');
+    div.classList.add('book-card');
+    div.style.animationDelay = `${index * 150}ms`; // Delay each card
+    div.innerHTML = `
+        <img src="${book.img}" alt="${book.title}">
+        <div class="book-title">${book.title}</div>
+        <div class="book-subtitle">${book.subtitle}</div>
+    `;
+    setTimeout(() => {
+        bookGrid.appendChild(div);
+    }, index * 150);
+});
+
+</script>
+
+</body>
+</html>

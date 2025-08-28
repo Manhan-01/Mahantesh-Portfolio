@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Reading Collection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #141414;
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #e50914;
+            border-radius: 2px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #e50914;
+            margin-bottom: 5px;
+        }
+        
+        .year {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .book-card {
+            background: #181818;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+            height: 100%;
+            text-align: center;
+            border-top: 4px solid #e50914;
+        }
+        
+        .book-card:hover {
+            transform: scale(1.05);
+            background: #202020;
+        }
+        
+        .book-poster {
+            width: 100%;
+            height: 180px;
+            background: #2c2c2c;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #e50914;
+            overflow: hidden;
+        }
+        
+        .book-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .book-info {
+            flex: 1;
+            width: 100%;
+        }
+        
+        .book-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+            line-height: 1.4;
+        }
+        
+        .book-year {
+            font-size: 1rem;
+            color: #e50914;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+        
+        .book-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: rgba(229, 9, 20, 0.3);
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 1200px) {
+            .book-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .book-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .book-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+    
+    <div class="container">
+        <header>
+            <h1>Reading!!!</h1>
+            <!-- <h2>Reading</h2> -->
+            <div class="year">Reading is a significant passion of mine. Below is a selection of books and novels I've recently enjoyed:</div>
+        </header>
+        
+        <div class="book-grid">
+            <div class="book-card">
+                <div class="book-number">01</div>
+                <div class="book-poster">
+                    <img src="Images/AtomicHabits.png" alt="Atomic Habits">
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">Atomic Habits</h3>
+                    <div class="book-year">James Clear</div>
+                </div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-number">02</div>
+                <div class="book-poster">
+                    <img src="Images/karvalo.jpg" alt="Karvalo">
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">Karvalo</h3>
+                    <div class="book-year">KP Poornachandra Tejaswi</div>
+                </div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-number">03</div>
+                <div class="book-poster">
+                    <img src="Images/2States.jpg" alt="2 States">
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">2 States</h3>
+                    <div class="book-year">Chetan Bhagat</div>
+                </div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-number">04</div>
+                <div class="book-poster">
+                    <div class="placeholder"><i class="fas fa-book"></i></div>
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">One Indian Girl</h3>
+                    <div class="book-year">Chetan Bhagat</div>
+                </div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-number">05</div>
+                <div class="book-poster">
+                    <div class="placeholder"><i class="fas fa-book"></i></div>
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">Thinking, Fast and Slow</h3>
+                    <div class="book-year">Daniel Kahneman</div>
+                </div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-number">06</div>
+                <div class="book-poster">
+                    <div class="placeholder"><i class="fas fa-book"></i></div>
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">The Power of Now</h3>
+                    <div class="book-year">Eckhart Tolle</div>
+                </div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-number">07</div>
+                <div class="book-poster">
+                    <div class="placeholder"><i class="fas fa-book"></i></div>
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">Sapiens</h3>
+                    <div class="book-year">Yuval Noah Harari</div>
+                </div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-number">08</div>
+                <div class="book-poster">
+                    <div class="placeholder"><i class="fas fa-book"></i></div>
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">The Alchemist</h3>
+                    <div class="book-year">Paulo Coelho</div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>My Reading Collection &copy; 2023</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookCards = document.querySelectorAll('.book-card');
+            
+            bookCards.forEach((card, index) => {
+                card.addEventListener('mouseenter', function() {
+                    this.querySelector('.book-poster').style.transform = 'scale(1.05)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.querySelector('.book-poster').style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

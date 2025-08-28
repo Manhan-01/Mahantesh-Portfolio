@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | Netflix Style</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        :root {
+            --netflix-red: #e50914;
+            --netflix-black: #141414;
+            --netflix-dark: #181818;
+            --netflix-gray: #808080;
+            --netflix-white: #ffffff;
+        }
+
+        body {
+            background-color: var(--netflix-black);
+            color: var(--netflix-white);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+            transition: background-color 0.3s;
+        }
+
+        header.scrolled {
+            background-color: var(--netflix-black);
+        }
+
+        .logo {
+            color: var(--netflix-red);
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .logo span {
+            margin-left: 5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: var(--netflix-white);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--netflix-red);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-icon, .menu-icon {
+            color: var(--netflix-white);
+            font-size: 18px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: 
+                linear-gradient(to top, var(--netflix-black) 0%, transparent 50%),
+                linear-gradient(to bottom, var(--netflix-black) 0%, transparent 5%),
+                linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('Images/Me.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            padding: 0 60px;
+            position: relative;
+}
+
+        .hero-content {margin-top: 25%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+}
+
+        .hero-badge {
+            background-color: var(--netflix-red);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .hero-title {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .hero-desc {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #e6e6e6;
+            line-height: 1.5;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--netflix-white);
+            color: var(--netflix-black);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: rgba(255, 255, 255, 0.75);
+        }
+
+        .btn-secondary {
+            background-color: rgba(109, 109, 110, 0.7);
+            color: var(--netflix-white);
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(109, 109, 110, 0.5);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        /* Content Rows */
+        .content-section {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding: 0 40px;
+        }
+
+        .row {
+            position: relative;
+        }
+
+        .slider {
+            display: flex;
+            padding: 0 40px;
+            gap: 10px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+        }
+
+        .slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slider-item {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 150px;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .slider-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+        }
+
+        .slider-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-item-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .slider-item:hover .slider-item-content {
+            opacity: 1;
+        }
+
+        .slider-item-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .slider-item-desc {
+            font-size: 12px;
+            color: #d2d2d2;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .slider-btn {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 100%;
+            font-size: 20px;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: background-color 0.3s;
+            z-index: 10;
+        }
+
+        .slider-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--netflix-dark);
+            margin: 50px auto;
+            max-width: 800px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .modal-header {
+            position: relative;
+            height: 350px;
+        }
+
+        .modal-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .modal-desc {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #d2d2d2;
+        }
+
+        .modal-details {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-detail {
+            font-size: 14px;
+        }
+
+        .modal-detail span {
+            color: var(--netflix-gray);
+            margin-right: 5px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px;
+            text-align: center;
+            color: var(--netflix-gray);
+            border-top: 1px solid #333;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            color: var(--netflix-gray);
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--netflix-white);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--netflix-gray);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .hero {
+                padding: 0 20px;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .hero-desc {
+                font-size: 16px;
+            }
+            
+            .section-title, .slider {
+                padding: 0 20px;
+            }
+            
+            .slider-item {
+                width: 200px;
+                height: 120px;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+        }
+        #downloadCV{
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <a href="#" class="logo">
+            <!-- <i class="fas fa-play-circle"></i> -->
+            <span>MANDY</span>
+        </a>
+        
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+        
+        <div class="nav-right">
+            <div class="search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">SOFTWARE ENGINEER</div>
+            <h1 class="hero-title">MAHANTESH PUJARI</h1>
+            <p class="hero-desc">Software Engineer with 3+ years of experience in full-stack development and maintaining scalable applications. Proficient in JavaScript, Python, HTML, CSS, and database management. Passionate about creating responsive web applications and optimizing system performance. Strong background in server management, production support, and cross-functional collaboration to deliver high-quality software solutions.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">
+                    <i class="fas fa-play"></i> View Intro
+                </button>
+                <button class="btn btn-secondary">
+                    <!-- <i class="fas fa-info-circle"></i> More Info -->
+                     <i class="fas fa-info-circle" id="downloadCV"></i><a href="myResume.pdf" target="_blank" download id="downloadCV">Download CV</a> 
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="content-section" id="projects">
+        <h2 class="section-title">Work Experience</h2>
+        <div class="row">
+            <div class="slider">
+                <div class="slider-item" data-id="1">
+                    <img src="Images/Wipro.jpg" alt="Wipro">
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Wipro Ltd</div>
+                        <div class="slider-item-desc">Wipro</div>
+                    </div>
+                </div>
+                <div class="slider-item" data-id="2">
+                    <img src="Images/Lloyds.png" alt="Lloyds Banking Group">
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Lloyds Banking Group</div>
+                        <div class="slider-item-desc">Wipro's client</div>
+                    </div>
+                </div>
+                <div class="slider-item" data-id="3">
+                    <img src="Images/Question.jpg" alt="Finance Dashboard">
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Next ???</div>
+                        <div class="slider-item-desc"></div>
+                    </div>
+                </div>
+                <!-- <div class="slider-item" data-id="4">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Task Management">
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Task Management System</div>
+                        <div class="slider-item-desc">Angular, NestJS, MySQL</div>
+                    </div>
+                </div>
+                <div class="slider-item" data-id="5">
+                    <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Social Media App">
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Social Media Platform</div>
+                        <div class="slider-item-desc">React Native, GraphQL, MongoDB</div>
+                    </div>
+                </div> -->
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn left-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn right-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section class="content-section" id="skills">
+        <h2 class="section-title">Hobbies</h2>
+        <div class="row">
+            <div class="slider">
+                <div class="slider-item" data-id="6">
+                    <a href="Books.html"><img src="Images/Books.jpg" alt="Books"></a>
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Reading</div>
+                        <div class="slider-item-desc">Self-Help, Novels, Articles</div>
+                    </div>
+                </div>
+                <div class="slider-item" data-id="7">
+                    <a href="Traveller.html"><img src="Images/Travel.avif" alt="Traveller"></a>
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Traveller</div>
+                        <div class="slider-item-desc">Mountains,Beaches,Castles,Museums,etc</div>
+                    </div>
+                </div>
+                <div class="slider-item" data-id="8">
+                    <a href="Photography.html"><img src="Images/Photography1.jpg" alt="Photography"></a>
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Mobile Photography</div>
+                        <div class="slider-item-desc">Photography, Videography</div>
+                    </div>
+                </div>
+                <div class="slider-item" data-id="9">
+                    <img src="Images/Gym.jpg" alt="Exercise">
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Exercise</div>
+                        <div class="slider-item-desc">Running, Gym, Physical Exercise</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn left-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn right-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="content-section" id="experience">
+        <h2 class="section-title">Skills</h2>
+        <div class="row">
+            <div class="slider">
+                <div class="slider-item" data-id="10">
+                    <img src="Images/frontend.avif" alt="Tech Company">
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Frontend Development</div>
+                        <div class="slider-item-desc">HTML5, CSS3, JavaScript, React</div>
+                    </div>
+                </div>
+                <div class="slider-item" data-id="11">
+                    <img src="Images/Backend.jpg" alt="Backend">
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Backend Development</div>
+                        <div class="slider-item-desc">Python, PHP, Node.js</div>
+                    </div>
+                </div>
+                <div class="slider-item" data-id="12">
+                    <img src="Images/Linux.png" alt="Linux">
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Operating System</div>
+                        <div class="slider-item-desc">Windows, MacOS, Linux</div>
+                    </div>
+                </div>
+                <div class="slider-item" data-id="13">
+                    <img src="Images/VLSI.jpg" alt="VLSI">
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">VLSI</div>
+                        <div class="slider-item-desc">Analog Layout Engineer</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn left-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn right-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates -->
+     <section class="content-section" id="projects">
+        <h2 class="section-title">Certificates</h2>
+        <div class="row">
+            <div class="slider">
+                <div class="slider-item" data-id="13">
+                    <a href="Certificates/WebDevelopment.jpg"><img src="Certificates/Full-Stack.jpg" alt="Full-Stack Web Development"></a>
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Full-Stack Web Development</div>
+                        <div class="slider-item-desc">UDEMY</div>
+                    </div>
+                </div>
+                <div class="slider-item" data-id="2">
+                    <a href="Certificates/GCP.png"><img src="Certificates/GCP.jpg" alt="GCP-ACE"></a>
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Associate Cloud Engineer</div>
+                        <div class="slider-item-desc">Google Cloud Platform</div>
+                    </div>
+                </div>
+                <div class="slider-item" data-id="3">
+                    <a href="Certificates/Unix.jpg"><img src="Certificates/Unix1.jpg" alt="Unix"></a>
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Unix</div>
+                        <div class="slider-item-desc">UDEMY</div>
+                    </div>
+                </div>
+                <!-- <div class="slider-item" data-id="4">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Task Management">
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Task Management System</div>
+                        <div class="slider-item-desc">Angular, NestJS, MySQL</div>
+                    </div>
+                </div>
+                <div class="slider-item" data-id="5">
+                    <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Social Media App">
+                    <div class="slider-item-content">
+                        <div class="slider-item-title">Social Media Platform</div>
+                        <div class="slider-item-desc">React Native, GraphQL, MongoDB</div>
+                    </div>
+                </div> -->
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn left-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn right-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <img src="" alt="Project Image" id="modalImage">
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title" id="modalTitle">Project Title</h2>
+                <p class="modal-desc" id="modalDesc">Project description will go here. This will include details about the project, technologies used, challenges faced, and outcomes achieved.</p>
+                <div class="modal-details">
+                    <div class="modal-detail"><span>Client:</span> <span id="modalClient">Client Name</span></div>
+                    <div class="modal-detail"><span>Start-Date:</span> <span id="modalSDate">January 2023</span></div>
+                    <div class="modal-detail"><span>End-Date:</span> <span id="modalEDate">January 2023</span></div>
+                    <div class="modal-detail"><span>Category:</span> <span id="modalCategory">Web Development</span></div>
+                </div>
+                <!-- <button class="btn btn-primary">
+                    <i class="fas fa-external-link-alt"></i> Visit Live Site
+                </button> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-icons">
+            <a href="https://github.com/Manhan-01"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/mahantesh-pujari-a287771a5"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:connectwithmahan@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/mandy._24"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+            <a href="#">Help Center</a>
+            <a href="#">Contact Me</a>
+        </div>
+        <p class="copyright">© 2025 Mahantesh Pujari Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const header = document.querySelector('header');
+        const sliderItems = document.querySelectorAll('.slider-item');
+        const modal = document.getElementById('projectModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalClient = document.getElementById('modalClient');
+        const modalSDate = document.getElementById('modalSDate');
+        const modalEDate = document.getElementById('modalEDate');
+        const modalCategory = document.getElementById('modalCategory');
+        
+        // Project data
+        const projectData = {
+            1: {
+                title: "Project Engineer | Bengaluru, India",
+                desc: "Full-Stack Developer specializing in building dynamic, responsive web applications from concept to deployment. Experienced in designing modern front-end interfaces with HTML, CSS, JavaScript, and Bootstrap, and engineering robust back-end systems with Node.js, Python, and MySQL. Focused on creating seamless user experiences and optimizing database performance for scalable, efficient applications.",
+                client: "Wipro",
+                sdate: "June 2022",
+                edate: "June 2023",
+                category: "Web Development",
+                image: "Images/ProjectEngineer.jpg"
+            },
+            2: {
+                title: "Production Support Engineer | London, UK",
+                desc: "Results-driven Production Support Engineer specializing in mission-critical banking payment applications (SWIFT, CHAPS, BACS). Provides expert 24/7 support, ensuring zero downtime for multi-million pound transaction systems. Proficient in IBM MQ, Linux, Bash scripting, and Oracle SQL, with deep expertise in SWIFT messaging and financial payment protocols. Adept at problem-solving in high-pressure environments and collaborating within Agile teams to maintain seamless operations and drive continuous improvement.",
+                client: "Lloyds Banking Group",
+                sdate: "June 2023",
+                edate: "Present",
+                category: "Production Support Engineer",
+                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+            },
+            3: {
+                title: "Your Next Great Hire? I Believe Soo...",
+                desc: "I am currently exploring new opportunities where I can apply my skills to meaningful challenges. I'm looking for a company that values innovation as much as I do—a place where we can mutually benefit from each other's excellence. If you're seeking a dedicated professional who can deliver exceptional results while fostering a positive team environment, then we might just be the perfect match. Let's connect and discuss how we can achieve great things together.",
+                client: "Searching ...",
+                sdate: "Predicting...",
+                edate: "Calculating...",
+                category:"Developer",
+                image: "Images/Loading.jpg"
+            },
+            4: {
+                title: "Finance Dashboard",
+                desc: "An interactive financial dashboard that visualizes complex financial data through charts, graphs, and tables. The dashboard provides real-time insights into financial performance, with customizable reports and data export functionality.",
+                client: "Wealth Management Inc.",
+                date: "November 2022",
+                category: "Web Application",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80"
+            }
+        };
+
+        
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Slider navigation
+        document.querySelectorAll('.slider').forEach(slider => {
+            const leftBtn = slider.parentElement.querySelector('.left-btn');
+            const rightBtn = slider.parentElement.querySelector('.right-btn');
+            
+            leftBtn.addEventListener('click', () => {
+                slider.scrollBy({ left: -300, behavior: 'smooth' });
+            });
+            
+            rightBtn.addEventListener('click', () => {
+                slider.scrollBy({ left: 300, behavior: 'smooth' });
+            });
+        });
+        
+        // Open modal on slider item click
+        sliderItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const id = item.getAttribute('data-id');
+                if (projectData[id]) {
+                    const data = projectData[id];
+                    modalImage.src = data.image;
+                    modalTitle.textContent = data.title;
+                    modalDesc.textContent = data.desc;
+                    modalClient.textContent = data.client;
+                    modalSDate.textContent = data.sdate;
+                    modalEDate.textContent = data.edate;
+                    modalCategory.textContent = data.category;
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        
+        // Close modal
+        modalClose.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        document.getElementById("downloadCV").addEventListener('click',function(){
+            const pdfFileName = 'myResume.pdf';
+
+            const link = document.createElement('a');
+            link.href = pdfFileName;
+            link.download = pdfFileName;
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        })
+    </script>
+</body>
+</html>

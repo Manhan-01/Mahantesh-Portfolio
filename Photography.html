@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hobby | Netflix Style</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    body {
+        background-color: #141414; color: white; margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    header {
+        position: fixed; top: 0; width: 100%; padding: 20px 40px;
+        display: flex; align-items: center; justify-content: space-between;
+        background-color: #141414; z-index: 1000;
+    }
+    .logo { color: #e50914; font-size: 28px; font-weight: bold; text-decoration: none; }
+    nav ul { display: flex; list-style: none; }
+    nav ul li { margin-left: 20px; }
+    nav ul li a { color: white; text-decoration: none; }
+    nav ul li a:hover { color: #e50914; }
+    .hobby-header {
+        margin-top: 100px; padding: 20px 40px; font-size: 28px; font-weight: bold;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+        padding: 20px 40px;
+    }
+    .photo-card {
+        background: #181818; border-radius: 6px; overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer; text-align: center;
+        opacity: 0; transform: translateY(20px);
+        animation: fadeInUp 0.5s ease forwards;
+    }
+    .photo-card img {
+        width: 100%; height: 200px; object-fit: cover;
+    }
+    .photo-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.7);
+    }
+    .photo-title { font-size: 16px; font-weight: bold; margin-top: 10px; }
+    .photo-subtitle { font-size: 14px; color: #d2d2d2; margin-bottom: 10px; }
+    
+    /* Modal styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+    }
+    .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+    }
+    .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .close:hover {
+        color: #e50914;
+    }
+    
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 1024px) {
+        .grid-container { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+        .grid-container { grid-template-columns: repeat(2, 1fr); }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">MANDY</a>
+</header>
+
+<div class="hobby-header" id="hobbyTitle">Loading...</div>
+
+<div class="grid-container" id="photoGrid">
+    <!-- photos will be inserted dynamically -->
+</div>
+
+<!-- The Modal -->
+<div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const hobbyName = params.get('name') || 'Some of My Best Shots!';
+document.getElementById('hobbyTitle').textContent = hobbyName;
+
+// Example photos Data
+const photos = [
+    { img: 'Photography/img (1).jpg', title: 'Bird\'s View', subtitle: 'First Fly' },
+    { img: 'Photography/img (2).jpg', title: 'Some pictures don\'t need perfect clarity, symmetry, or color to be the best.', subtitle: 'Tower Bridge, London' },
+    { img: 'Photography/img (3).jpg', title: 'Where history stands tall, One stone chose to wander.', subtitle: 'Stonehenge' },
+    { img: 'Photography/img (4).jpg', title: 'Near Side', subtitle: 'Moon' },
+    { img: 'Photography/img (5).jpg', title: 'A Perfect Summer', subtitle: 'Romford, London' },
+    { img: 'Photography/img (6).jpg', title: 'Romford', subtitle: 'London' },
+    { img: 'Photography/img (7).jpg', title: 'St Paul Cathedrel', subtitle: 'London' },
+    { img: 'Photography/img (8).jpg', title: 'Elegance, undimmed by the night rain', subtitle: 'Aston Martin' },
+    { img: 'Photography/img (9).jpg', title: 'Spring\'s finest display frame.', subtitle: 'Bentley' },
+    { img: 'Photography/img (10).jpg', title: 'Sunset paints the skyline in hues of nostalgia.', subtitle: 'View from 125 LW' },
+    { img: 'Photography/img (11).jpg', title: 'Steel, history, and a golden sky', subtitle: 'View from 125 LW' },
+    { img: 'Photography/img (12).jpg', title: 'The fastest shade of red.', subtitle: 'O2 Arena' },
+    { img: 'Photography/img (13).jpg', title: 'A genius painter painted the night sky.', subtitle: 'Northern Lights from my Window' },
+    { img: 'Photography/img (14).jpg', title: 'Once a part of Greater story', subtitle: 'British Museum' },
+    { img: 'Photography/img (15).jpg', title: 'Past and present sharing the same frame.', subtitle: 'London' },
+    { img: 'Photography/img (16).jpg', title: 'A lion for courage, A queen for legacy.', subtitle: 'Buckingham Palace' },
+    { img: 'Photography/img (17).jpg', title: 'Cambridge', subtitle: 'England' },
+    { img: 'Photography/img (18).jpg', title: 'Earth’s faithful companion', subtitle: 'The Moon ' },
+    { img: 'Photography/img (19).jpg', title: 'Mustang at midnight', subtitle: 'Mustang' },
+    { img: 'Photography/img (20).jpg', title: 'British Museum', subtitle: 'London' },
+    { img: 'Photography/img (21).jpg', title: 'Boadicea and Her Daughters', subtitle: 'London' },
+    { img: 'Photography/img (22).jpg', title: 'Coming Soon', subtitle: '' }
+];
+
+const photoGrid = document.getElementById('photoGrid');
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImage');
+const closeBtn = document.querySelector('.close');
+
+// Function to open modal with image
+function openModal(imgSrc) {
+    modal.style.display = 'flex';
+    modalImg.src = imgSrc;
+    
+    // Check image dimensions after it loads
+    const img = new Image();
+    img.onload = function() {
+        const width = this.width;
+        const height = this.height;
+        const ratio = width / height;
+        
+        // Set appropriate class based on aspect ratio
+        if (ratio > 1) {
+            modalImg.style.width = 'auto';
+            modalImg.style.height = '80%';
+        } else {
+            modalImg.style.width = '80%';
+            modalImg.style.height = 'auto';
+        }
+    };
+    img.src = imgSrc;
+}
+
+// Close modal when clicking on X
+closeBtn.addEventListener('click', function() {
+    modal.style.display = 'none';
+});
+
+// Close modal when clicking outside the image
+modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+// Create photo cards
+photos.forEach((photo, index) => {
+    const div = document.createElement('div');
+    div.classList.add('photo-card');
+    div.style.animationDelay = `${index * 150}ms`; // Delay each card
+    div.innerHTML = `
+        <img src="${photo.img}" alt="${photo.title}">
+        <div class="photo-title">${photo.title}</div>
+        <div class="photo-subtitle">${photo.subtitle}</div>
+    `;
+    
+    // Add click event to open modal
+    div.addEventListener('click', function() {
+        openModal(photo.img);
+    });
+    
+    setTimeout(() => {
+        photoGrid.appendChild(div);
+    }, index * 150);
+});
+
+</script>
+
+</body>
+</html>
