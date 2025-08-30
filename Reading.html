@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Reading Collection</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/jpg" href="Images/favicon1.png">
     <style>
         * {
             margin: 0;
@@ -296,6 +297,19 @@
                 });
             });
         });
+
+
+
+        // Check if user came from another page on your site
+if (document.referrer.indexOf("yourdomain.com") === -1) {
+    // Redirect to profile page after 1 second
+    setTimeout(function() {
+        window.location.href = "profile.html";
+    }, 1000);
+}
+
+
     </script>
 </body>
 </html>
+

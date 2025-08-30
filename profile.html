@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who's Watching?</title>
+    <link rel="icon" type="image/jpg" href="Images/favicon1.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #141414;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 500;
+            margin-bottom: 50px;
+            color: #fff;
+        }
+        
+        .profiles-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .profile {
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 180px;
+        }
+        
+        .profile:hover {
+            transform: scale(1.05);
+        }
+        
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 4px;
+            margin: 0 auto 15px;
+            overflow: hidden;
+            border: 3px solid transparent;
+            object-fit: cover;
+        }
+        
+        .profile:hover .profile-image {
+            border-color: white;
+        }
+        
+        .profile-name {
+            color: #808080;
+            font-size: 1.4rem;
+        }
+        
+        .profile:hover .profile-name {
+            color: white;
+        }
+        
+        .add-profile {
+            cursor: pointer;
+        }
+        
+        .add-icon {
+            width: 150px;
+            height: 150px;
+            border-radius: 4px;
+            margin: 0 auto 15px;
+            background-color: #2f2f2f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            color: #808080;
+            border: 3px solid transparent;
+        }
+        
+        .add-profile:hover .add-icon {
+            border-color: #808080;
+            color: white;
+            background-color: #3f3f3f;
+        }
+        
+        .manage-button {
+            margin-top: 40px;
+            padding: 12px 30px;
+            background-color: transparent;
+            color: #808080;
+            border: 1px solid #808080;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .manage-button:hover {
+            color: white;
+            border-color: white;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 30px;
+            }
+            
+            .profile-image, .add-icon {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .profile-name {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Who's watching?</h1>
+        
+        <div class="profiles-container">
+            <div class="profile">
+                <a href="index.html"><img src="Images/HR.png" alt="HR" class="profile-image"></a>
+                <div class="profile-name">HR</div>
+            </div>
+            
+            <div class="profile">
+                <a href="index.html"><img src="Images/Recruiter.jpg" alt="Recruiter" class="profile-image"></a>
+                <div class="profile-name">Recruiter</div>
+            </div>
+            
+            <div class="profile">
+                <a href="index.html"><img src="Images/Guest1.jpg" alt="Guest" class="profile-image"></a>
+                <div class="profile-name">Guest</div>
+            </div>
+            
+            <div class="profile">
+                <a href="index.html"><img src="Images/Mandy.png" alt="Mandy" class="profile-image"></a>
+                <div class="profile-name">Mandy</div>
+            </div>
+            
+            
+        </div>
+        
+        <!-- <button class="manage-button">MANAGE PROFILES</button> -->
+    </div>
+
+    <script>
+        // Add click event to profiles
+        document.querySelectorAll('.profile').forEach(profile => {
+            profile.addEventListener('click', function() {
+                const name = this.querySelector('.profile-name').textContent;
+                // alert(`Profile "${name}" selected!`);
+            });
+        });
+        
+        // Add click event to "Add Profile"
+        document.querySelector('.add-profile').addEventListener('click', function() {
+            // alert('Add new profile feature would open here.');
+        });
+        
+        // Add click event to manage button
+        document.querySelector('.manage-button').addEventListener('click', function() {
+            // alert('Manage profiles feature would open here.');
+        });
+    </script>
+</body>
+</html>
