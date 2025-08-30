@@ -464,9 +464,10 @@
                 <li><a href="#projects">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#hobbies">Hobbies</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
+        
         
         <div class="nav-right">
             <div class="search-icon">
@@ -641,20 +642,7 @@
                         <div class="slider-item-desc">UDEMY</div>
                     </div>
                 </div>
-                <!-- <div class="slider-item" data-id="4">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Task Management">
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Task Management System</div>
-                        <div class="slider-item-desc">Angular, NestJS, MySQL</div>
-                    </div>
-                </div>
-                <div class="slider-item" data-id="5">
-                    <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Social Media App">
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Social Media Platform</div>
-                        <div class="slider-item-desc">React Native, GraphQL, MongoDB</div>
-                    </div>
-                </div> -->
+                
             </div>
             <div class="slider-controls">
                 <button class="slider-btn left-btn"><i class="fas fa-chevron-left"></i></button>
@@ -817,20 +805,24 @@
         });
         
         // Smooth scrolling for navigation links
+        // Smooth scrolling for navigation links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
                 
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                // Only prevent default for anchor links (starting with #)
+                if (targetId.startsWith('#')) {
+                    e.preventDefault();
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
+                // For external links (like about.html), allow default behavior
             });
         });
 

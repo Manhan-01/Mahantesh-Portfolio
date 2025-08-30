@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Mandy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #141414;
+            color: #fff;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #333;
+        }
+        
+        /* .logo {
+            color: #e50914;
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+        } */
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .intro-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .heading {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .name {
+            color: #e50914;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: #ddd;
+        }
+        
+        .profile-container {
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        
+        .profile-section {
+            display: inline-block;
+            width: 35%;
+            vertical-align: top;
+            min-width: 300px;
+        }
+        
+        .profile-image {
+            width: 100%;
+            border-radius: 10%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .profile-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .content-section {
+            display: inline-block;
+            width: 60%;
+            vertical-align: top;
+            padding-left: 40px;
+            min-width: 300px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            color: #e50914;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+            width: 100%;
+        }
+        
+        .detail-item {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #e50914;
+        }
+        
+        .detail-label {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        
+        .detail-value {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .location {
+            color: #e50914;
+            font-weight: 600;
+        }
+        
+        .footer {
+            background: #000;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+            border-radius: 10px;
+        }
+        
+        .social-links {
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            color: #fff;
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #e50914;
+        }
+        
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .heading {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .profile-section, .content-section {
+                display: block;
+                width: 100%;
+                padding-left: 0;
+            }
+            
+            .content-section {
+                margin-top: 30px;
+            }
+            
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+        }
+
+        .logo {
+            color: #e50914;
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .logo span {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <!-- <i class="fas fa-play-circle"></i> -->
+            <span>MANDY</span>
+        </a>
+    </header>
+
+    <div class="container">
+        
+
+        <!-- Intro Section -->
+        <section class="intro-section">
+            <h1 class="heading">Hi, I'm <span class="name">Mahantesh Pujari</span></h1>
+            <p class="subtitle">Software Engineer specializing in FinTech & Full Stack Development</p>
+        </section>
+
+        <!-- Profile Container -->
+        <div class="profile-container">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img src="Images/Profile.jpg" alt="Mahantesh Pujari">
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h2 class="section-title">Who Am I?</h2>
+                <p class="description">
+                    Hi, I'm Mahantesh Pujari, a Software Engineer based in <span class="location">London, UK</span>. I specialize in Production Support for critical payment applications and have experience as a Full Stack Developer.Currently I\'m working in Wipro and for client - Lloyds Banking Group'
+            </div>
+            
+            <div class="detail-item">
+                <div class="detail-label">Nationality</div>
+                <div class="detail-value">Indian</div>
+            </div>
+            
+            <div class="detail-item">
+                <div class="detail-label">Education</div>
+                <div class="detail-value">Bachelor of engineering in Electronics & Communication Engineering</div>
+            </div>
+            
+            <div class="detail-item">
+                <div class="detail-label">Experience</div>
+                <div class="detail-value">3+ Years</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="copyright">© 2023 Mahantesh Pujari. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
