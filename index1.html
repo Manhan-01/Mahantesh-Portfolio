@@ -94,67 +94,6 @@
             cursor: pointer;
         }
 
-        /* Search Bar */
-        .search-container {
-            display: none;
-            position: relative;
-            margin-right: 15px;
-        }
-
-        .search-input {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid var(--netflix-gray);
-            color: var(--netflix-white);
-            padding: 8px 12px;
-            border-radius: 4px;
-            width: 200px;
-            font-size: 14px;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--netflix-white);
-        }
-
-        /* Dropdown Menu */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: var(--netflix-dark);
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .dropdown-content a {
-            color: var(--netflix-white);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 14px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .dropdown-content a:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown-content a:hover {
-            background-color: var(--netflix-red);
-        }
-
-        .dropdown.show .dropdown-content {
-            display: block;
-        }
-
         /* Hero Section */
         .hero {
             height: 80vh;
@@ -167,15 +106,14 @@
             align-items: center;
             padding: 0 60px;
             position: relative;
-        }
+}
 
-        .hero-content {
-            margin-top: 25%;
+        .hero-content {margin-top: 25%;
             max-width: 600px;
             background: rgba(0, 0, 0, 0.6);
             padding: 20px;
             border-radius: 10px;
-        }
+}
 
         .hero-badge {
             background-color: var(--netflix-red);
@@ -422,6 +360,17 @@
             margin-right: 5px;
         }
 
+        /* Skills Modal Specific Styles */
+        .skills-list {
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        .skills-list li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
         /* Footer */
         footer {
             padding: 40px;
@@ -479,31 +428,6 @@
                 display: none;
             }
             
-            .nav-right .search-icon {
-                display: none;
-            }
-            
-            .dropdown-content {
-                position: fixed;
-                top: 60px;
-                left: 0;
-                right: 0;
-                width: 100%;
-                min-width: unset;
-            }
-            
-            .search-container {
-                display: block;
-                width: 100%;
-                padding: 10px;
-                background-color: var(--netflix-dark);
-                border-bottom: 1px solid #333;
-            }
-            
-            .search-input {
-                width: 100%;
-            }
-            
             .hero {
                 padding: 0 20px;
                 text-align: center;
@@ -531,7 +455,6 @@
                 width: 95%;
             }
         }
-        
         #downloadCV{
             text-decoration: none;
             color: white;
@@ -542,6 +465,7 @@
     <!-- Header & Navigation -->
     <header>
         <a href="#" class="logo">
+            <!-- <i class="fas fa-play-circle"></i> -->
             <span>MANDY</span>
         </a>
         
@@ -555,22 +479,13 @@
             </ul>
         </nav>
         
+        
         <div class="nav-right">
             <div class="search-icon">
                 <i class="fas fa-search"></i>
             </div>
-            <div class="dropdown">
-                <div class="menu-icon">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <div class="dropdown-content">
-                    <div class="search-container mobile-only">
-                        <!-- <input type="text" class="search-input" placeholder="Search..."> -->
-                    </div>
-                    <a href="profile.html">Profile</a>
-                    <a href="about.html">Account</a>
-                    <a href="#" id="exit-option">Exit</a>
-                </div>
+            <div class="menu-icon">
+                <a href="profile.html" style="text-decoration: none;color: white;"><i class="fas fa-bars"></i></a>
             </div>
         </div>
     </header>
@@ -586,7 +501,8 @@
                     <i class="fas fa-play"></i> View Intro
                 </button>
                 <button class="btn btn-secondary">
-                    <i class="fas fa-info-circle" id="downloadCV"></i><a href="myResume.pdf" target="_blank" download id="downloadCV">Download CV</a> 
+                    <!-- <i class="fas fa-info-circle"></i> More Info -->
+                     <i class="fas fa-info-circle" id="downloadCV"></i><a href="myResume.pdf" target="_blank" download id="downloadCV">Download CV</a> 
                 </button>
             </div>
         </div>
@@ -627,33 +543,35 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
+
+
+    <!-- skills Section -->
     <section class="content-section" id="skills">
         <h2 class="section-title">Skills</h2>
         <div class="row">
             <div class="slider">
-                <div class="slider-item" data-id="6">
+                <div class="slider-item" data-id="6" data-type="skill">
                     <img src="Images/frontend.avif" alt="Tech Company">
                     <div class="slider-item-content">
                         <div class="slider-item-title">Frontend Development</div>
                         <div class="slider-item-desc">HTML5, CSS3, JavaScript, React</div>
                     </div>
                 </div>
-                <div class="slider-item" data-id="7">
+                <div class="slider-item" data-id="7" data-type="skill">
                     <img src="Images/Backend.jpg" alt="Backend">
                     <div class="slider-item-content">
                         <div class="slider-item-title">Backend Development</div>
                         <div class="slider-item-desc">Python, PHP, Node.js</div>
                     </div>
                 </div>
-                <div class="slider-item" data-id="8">
+                <div class="slider-item" data-id="8" data-type="skill">
                     <img src="Images/Linux.png" alt="Linux">
                     <div class="slider-item-content">
                         <div class="slider-item-title">Operating System</div>
                         <div class="slider-item-desc">Windows, MacOS, Linux</div>
                     </div>
                 </div>
-                <div class="slider-item" data-id="9">
+                <div class="slider-item" data-id="9" data-type="skill">
                     <img src="Images/VLSI.jpg" alt="VLSI">
                     <div class="slider-item-content">
                         <div class="slider-item-title">VLSI</div>
@@ -668,7 +586,7 @@
         </div>
     </section>
 
-    <!-- Hobbies Section -->
+        <!-- Hobbies Section -->
     <section class="content-section" id="hobbies">
         <h2 class="section-title">Hobbies</h2>
         <div class="row">
@@ -762,6 +680,28 @@
                     <div class="modal-detail"><span>End-Date:</span> <span id="modalEDate">January 2023</span></div>
                     <div class="modal-detail"><span>Category:</span> <span id="modalCategory">Web Development</span></div>
                 </div>
+                <!-- <button class="btn btn-primary">
+                    <i class="fas fa-external-link-alt"></i> Visit Live Site
+                </button> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Modal -->
+    <div class="modal" id="skillsModal">
+        <div class="modal-content">
+            <button class="modal-close" id="skillsModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <img src="" alt="Skill Image" id="skillsImage">
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title" id="skillsTitle">Skill Title</h2>
+                <p class="modal-desc" id="skillsDesc">Skill description will go here.</p>
+                <div id="skillsPoints">
+                    <!-- Skill points will be inserted here -->
+                </div>
             </div>
         </div>
     </div>
@@ -796,10 +736,14 @@
         const modalSDate = document.getElementById('modalSDate');
         const modalEDate = document.getElementById('modalEDate');
         const modalCategory = document.getElementById('modalCategory');
-        const searchIcon = document.querySelector('.search-icon');
-        const dropdown = document.querySelector('.dropdown');
-        const searchInput = document.querySelector('.search-input');
-        const exitOption = document.getElementById('exit-option');
+        
+        // Skills Modal Elements
+        const skillsModal = document.getElementById('skillsModal');
+        const skillsModalClose = document.getElementById('skillsModalClose');
+        const skillsImage = document.getElementById('skillsImage');
+        const skillsTitle = document.getElementById('skillsTitle');
+        const skillsDesc = document.getElementById('skillsDesc');
+        const skillsPoints = document.getElementById('skillsPoints');
         
         // Project data
         const projectData = {
@@ -829,14 +773,58 @@
                 edate: "Calculating...",
                 category:"Developer",
                 image: "Images/Loading.jpg"
+            }
+        };
+
+        // Skills data
+        const skillsData = {
+            6: {
+                title: "Frontend Development",
+                desc: "Experienced in creating responsive and interactive user interfaces using modern web technologies.",
+                image: "Images/frontend.avif",
+                points: [
+                    "Proficient in HTML5, CSS3, and JavaScript ",
+                    "Experience with React.js for building dynamic user interfaces",
+                    "Knowledge of responsive design principles and cross-browser compatibility",
+                    "Familiar with CSS frameworks like Bootstrap and preprocessors like SASS",
+                    "Understanding of UI/UX design principles"
+                ]
             },
-            4: {
-                title: "Finance Dashboard",
-                desc: "An interactive financial dashboard that visualizes complex financial data through charts, graphs, and tables. The dashboard provides real-time insights into financial performance, with customizable reports and data export functionality.",
-                client: "Wealth Management Inc.",
-                date: "November 2022",
-                category: "Web Application",
-                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80"
+            7: {
+                title: "Backend Development",
+                desc: "Skilled in server-side programming and database management for building robust web applications.",
+                image: "Images/Backend.jpg",
+                points: [
+                    "Proficient in Python for backend development",
+                    "Experience with PHP and Node.js for server-side programming",
+                    "Database management with MySQL, MongoDB, and PostgreSQL",
+                    "API development and integration (REST, GraphQL)",
+                    "Understanding of server deployment and cloud services"
+                ]
+            },
+            8: {
+                title: "Operating Systems",
+                desc: "Experienced with various operating systems and their environments for development and production.",
+                image: "Images/Linux.png",
+                points: [
+                    "Proficient in Linux/Unix environments and command line",
+                    "Experience with Windows Server and desktop environments",
+                    "Knowledge of macOS for development purposes",
+                    "Hands on experience in Virtual machine",
+                    "Shell scripting and system administration tasks"
+                ]
+            },
+            9: {
+                title: "VLSI - Analog Layout Engineering",
+                desc: "Background in Very Large Scale Integration with focus on analog circuit design and layout.",
+                image: "Images/VLSI.jpg",
+                points: [
+                    "Experience with analog and mixed-signal IC design",
+                    "Proficient in layout tools like Cadence Virtuoso",
+                    "Knowledge of CMOS fabrication process and design rules",
+                    "Understanding of parasitic extraction and post-layout simulation",
+                    "Experience with DRC and LVS verification"
+                ]
             }
         };
         
@@ -867,7 +855,34 @@
         sliderItems.forEach(item => {
             item.addEventListener('click', () => {
                 const id = item.getAttribute('data-id');
-                if (projectData[id]) {
+                const type = item.getAttribute('data-type');
+                
+                if (type === 'skill' && skillsData[id]) {
+                    // Open skills modal
+                    const data = skillsData[id];
+                    skillsImage.src = data.image;
+                    skillsTitle.textContent = data.title;
+                    skillsDesc.textContent = data.desc;
+                    
+                    // Clear previous points
+                    skillsPoints.innerHTML = '';
+                    
+                    // Add skill points
+                    const pointsList = document.createElement('ul');
+                    pointsList.className = 'skills-list';
+                    
+                    data.points.forEach(point => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = point;
+                        pointsList.appendChild(listItem);
+                    });
+                    
+                    skillsPoints.appendChild(pointsList);
+                    skillsModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+                else if (projectData[id]) {
+                    // Open project modal
                     const data = projectData[id];
                     modalImage.src = data.image;
                     modalTitle.textContent = data.title;
@@ -882,16 +897,25 @@
             });
         });
         
-        // Close modal
+        // Close modals
         modalClose.addEventListener('click', () => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
         
-        // Close modal when clicking outside
+        skillsModalClose.addEventListener('click', () => {
+            skillsModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modals when clicking outside
         window.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            if (e.target === skillsModal) {
+                skillsModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         });
@@ -917,76 +941,7 @@
             });
         });
 
-        // Search functionality
-        searchIcon.addEventListener('click', () => {
-            const searchContainer = document.querySelector('.search-container');
-            searchContainer.style.display = searchContainer.style.display === 'block' ? 'none' : 'block';
-            
-            if (searchContainer.style.display === 'block') {
-                searchInput.focus();
-            }
-        });
-        
-        // Search functionality
-        searchInput.addEventListener('keyup', (e) => {
-            if (e.key === 'Enter') {
-                const searchTerm = searchInput.value.toLowerCase();
-                let found = false;
-                
-                // Search through project data
-                for (const id in projectData) {
-                    const project = projectData[id];
-                    if (project.title.toLowerCase().includes(searchTerm) || 
-                        project.desc.toLowerCase().includes(searchTerm)) {
-                        // Show the modal with the matching project
-                        modalImage.src = project.image;
-                        modalTitle.textContent = project.title;
-                        modalDesc.textContent = project.desc;
-                        modalClient.textContent = project.client;
-                        modalSDate.textContent = project.sdate;
-                        modalEDate.textContent = project.edate;
-                        modalCategory.textContent = project.category;
-                        modal.style.display = 'block';
-                        document.body.style.overflow = 'hidden';
-                        found = true;
-                        break;
-                    }
-                }
-                
-                if (!found) {
-                    alert('No results found for: ' + searchTerm);
-                }
-            }
-        });
-        
-        // Dropdown menu functionality
-        document.querySelector('.menu-icon').addEventListener('click', (e) => {
-            e.stopPropagation();
-            dropdown.classList.toggle('show');
-        });
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!dropdown.contains(e.target)) {
-                dropdown.classList.remove('show');
-            }
-        });
-        
-        // Exit option functionality
-        exitOption.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (confirm('Are you sure you want to exit?')) {
-                window.close();
-                
-                // Fallback if window.close doesn't work
-                if (!window.closed) {
-                    alert('The window could not be closed. Please close the tab manually.');
-                }
-            }
-        });
-        
-        // CV download functionality
-        document.getElementById("downloadCV").addEventListener('click', function(){
+        document.getElementById("downloadCV").addEventListener('click',function(){
             const pdfFileName = 'myResume.pdf';
 
             const link = document.createElement('a');
@@ -996,7 +951,7 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-        });
+        })
     </script>
 </body>
 </html>

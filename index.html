@@ -360,6 +360,17 @@
             margin-right: 5px;
         }
 
+        /* Skills Modal Specific Styles */
+        .skills-list {
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        .skills-list li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
         /* Footer */
         footer {
             padding: 40px;
@@ -534,33 +545,33 @@
 
 
 
-    <!-- Experience Section -->
+    <!-- skills Section -->
     <section class="content-section" id="skills">
         <h2 class="section-title">Skills</h2>
         <div class="row">
             <div class="slider">
-                <div class="slider-item" data-id="6">
+                <div class="slider-item" data-id="6" data-type="skill">
                     <img src="Images/frontend.avif" alt="Tech Company">
                     <div class="slider-item-content">
                         <div class="slider-item-title">Frontend Development</div>
                         <div class="slider-item-desc">HTML5, CSS3, JavaScript, React</div>
                     </div>
                 </div>
-                <div class="slider-item" data-id="7">
+                <div class="slider-item" data-id="7" data-type="skill">
                     <img src="Images/Backend.jpg" alt="Backend">
                     <div class="slider-item-content">
                         <div class="slider-item-title">Backend Development</div>
                         <div class="slider-item-desc">Python, PHP, Node.js</div>
                     </div>
                 </div>
-                <div class="slider-item" data-id="8">
+                <div class="slider-item" data-id="8" data-type="skill">
                     <img src="Images/Linux.png" alt="Linux">
                     <div class="slider-item-content">
                         <div class="slider-item-title">Operating System</div>
                         <div class="slider-item-desc">Windows, MacOS, Linux</div>
                     </div>
                 </div>
-                <div class="slider-item" data-id="9">
+                <div class="slider-item" data-id="9" data-type="skill">
                     <img src="Images/VLSI.jpg" alt="VLSI">
                     <div class="slider-item-content">
                         <div class="slider-item-title">VLSI</div>
@@ -676,6 +687,25 @@
         </div>
     </div>
 
+    <!-- Skills Modal -->
+    <div class="modal" id="skillsModal">
+        <div class="modal-content">
+            <button class="modal-close" id="skillsModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <img src="" alt="Skill Image" id="skillsImage">
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title" id="skillsTitle">Skill Title</h2>
+                <p class="modal-desc" id="skillsDesc">Skill description will go here.</p>
+                <div id="skillsPoints">
+                    <!-- Skill points will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="social-icons">
@@ -707,6 +737,14 @@
         const modalEDate = document.getElementById('modalEDate');
         const modalCategory = document.getElementById('modalCategory');
         
+        // Skills Modal Elements
+        const skillsModal = document.getElementById('skillsModal');
+        const skillsModalClose = document.getElementById('skillsModalClose');
+        const skillsImage = document.getElementById('skillsImage');
+        const skillsTitle = document.getElementById('skillsTitle');
+        const skillsDesc = document.getElementById('skillsDesc');
+        const skillsPoints = document.getElementById('skillsPoints');
+        
         // Project data
         const projectData = {
             1: {
@@ -735,18 +773,60 @@
                 edate: "Calculating...",
                 category:"Developer",
                 image: "Images/Loading.jpg"
-            },
-            4: {
-                title: "Finance Dashboard",
-                desc: "An interactive financial dashboard that visualizes complex financial data through charts, graphs, and tables. The dashboard provides real-time insights into financial performance, with customizable reports and data export functionality.",
-                client: "Wealth Management Inc.",
-                date: "November 2022",
-                category: "Web Application",
-                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80"
             }
         };
 
-        
+        // Skills data
+        const skillsData = {
+            6: {
+                title: "Frontend Development",
+                desc: "Experienced in creating responsive and interactive user interfaces using modern web technologies.",
+                image: "Images/frontend.avif",
+                points: [
+                    "Proficient in HTML5, CSS3, and JavaScript ",
+                    "Experience with React.js for building dynamic user interfaces",
+                    "Knowledge of responsive design principles and cross-browser compatibility",
+                    "Familiar with CSS frameworks like Bootstrap and preprocessors like SASS",
+                    "Understanding of UI/UX design principles"
+                ]
+            },
+            7: {
+                title: "Backend Development",
+                desc: "Skilled in server-side programming and database management for building robust web applications.",
+                image: "Images/Backend.jpg",
+                points: [
+                    "Proficient in Python for backend development",
+                    "Experience with PHP and Node.js for server-side programming",
+                    "Database management with MySQL, MongoDB, and PostgreSQL",
+                    "API development and integration (REST, GraphQL)",
+                    "Understanding of server deployment and cloud services"
+                ]
+            },
+            8: {
+                title: "Operating Systems",
+                desc: "Experienced with various operating systems and their environments for development and production.",
+                image: "Images/Linux.png",
+                points: [
+                    "Proficient in Linux/Unix environments and command line",
+                    "Experience with Windows Server and desktop environments",
+                    "Knowledge of macOS for development purposes",
+                    "Hands on experience in Virtual machine",
+                    "Shell scripting and system administration tasks"
+                ]
+            },
+            9: {
+                title: "VLSI - Analog Layout Engineering",
+                desc: "Background in Very Large Scale Integration with focus on analog circuit design and layout.",
+                image: "Images/VLSI.jpg",
+                points: [
+                    "Experience with analog and mixed-signal IC design",
+                    "Proficient in layout tools like Cadence Virtuoso",
+                    "Knowledge of CMOS fabrication process and design rules",
+                    "Understanding of parasitic extraction and post-layout simulation",
+                    "Experience with DRC and LVS verification"
+                ]
+            }
+        };
         
         // Header scroll effect
         window.addEventListener('scroll', () => {
@@ -775,7 +855,34 @@
         sliderItems.forEach(item => {
             item.addEventListener('click', () => {
                 const id = item.getAttribute('data-id');
-                if (projectData[id]) {
+                const type = item.getAttribute('data-type');
+                
+                if (type === 'skill' && skillsData[id]) {
+                    // Open skills modal
+                    const data = skillsData[id];
+                    skillsImage.src = data.image;
+                    skillsTitle.textContent = data.title;
+                    skillsDesc.textContent = data.desc;
+                    
+                    // Clear previous points
+                    skillsPoints.innerHTML = '';
+                    
+                    // Add skill points
+                    const pointsList = document.createElement('ul');
+                    pointsList.className = 'skills-list';
+                    
+                    data.points.forEach(point => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = point;
+                        pointsList.appendChild(listItem);
+                    });
+                    
+                    skillsPoints.appendChild(pointsList);
+                    skillsModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+                else if (projectData[id]) {
+                    // Open project modal
                     const data = projectData[id];
                     modalImage.src = data.image;
                     modalTitle.textContent = data.title;
@@ -790,21 +897,29 @@
             });
         });
         
-        // Close modal
+        // Close modals
         modalClose.addEventListener('click', () => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
         
-        // Close modal when clicking outside
+        skillsModalClose.addEventListener('click', () => {
+            skillsModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modals when clicking outside
         window.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
+            if (e.target === skillsModal) {
+                skillsModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
         });
         
-        // Smooth scrolling for navigation links
         // Smooth scrolling for navigation links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
