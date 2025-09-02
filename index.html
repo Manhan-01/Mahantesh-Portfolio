@@ -85,6 +85,7 @@
         .nav-right {
             display: flex;
             align-items: center;
+            position: relative;
         }
 
         .search-icon, .menu-icon {
@@ -92,6 +93,38 @@
             font-size: 18px;
             margin-left: 20px;
             cursor: pointer;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--netflix-black);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1001;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            color: var(--netflix-white);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--netflix-red);
         }
 
         /* Hero Section */
@@ -106,14 +139,15 @@
             align-items: center;
             padding: 0 60px;
             position: relative;
-}
+        }
 
-        .hero-content {margin-top: 25%;
+        .hero-content {
+            margin-top: 25%;
             max-width: 600px;
             background: rgba(0, 0, 0, 0.6);
             padding: 20px;
             border-radius: 10px;
-}
+        }
 
         .hero-badge {
             background-color: var(--netflix-red);
@@ -532,8 +566,16 @@
             <!-- <div class="search-icon">
                 <i class="fas fa-search"></i>
             </div> -->
-            <div class="menu-icon">
-                <a href="profile.html" style="text-decoration: none;color: white;"><i class="fas fa-bars"></i></a>
+            <div class="menu-icon" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <!-- Dropdown Menu -->
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="profile.html">Profile</a>
+                <a href="#">Option 1</a>
+                <a href="#">Option 2</a>
+                <a href="#">Option 3</a>
             </div>
         </div>
     </header>
@@ -664,7 +706,7 @@
                     <img src="Images/Gym.jpg" alt="Exercise">
                     <div class="slider-item-content">
                         <div class="slider-item-title">Exercise</div>
-                        <div class="slider-item-desc">Running, Gym, Physical Exercise</div>
+                        <!-- <div class="slider-item-desc">Running, Gym, Physical Exercise</div> -->
                     </div>
                 </div>
             </div>
@@ -806,6 +848,10 @@
         const certificateModalClose = document.getElementById('certificateModalClose');
         const certificateImage = document.getElementById('certificateImage');
         const certificateItems = document.querySelectorAll('.certificate-item');
+        
+        // Dropdown Elements
+        const menuToggle = document.getElementById('menuToggle');
+        const dropdownMenu = document.getElementById('dropdownMenu');
         
         // Project data
         const projectData = {
@@ -968,6 +1014,19 @@
                 certificateModal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
             });
+        });
+        
+        // Toggle dropdown menu
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-right')) {
+                dropdownMenu.classList.remove('show');
+            }
         });
         
         // Close modals
