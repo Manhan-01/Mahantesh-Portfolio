@@ -289,9 +289,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.9);
             z-index: 2000;
             overflow-y: auto;
+            justify-content: center;
+            align-items: center;
         }
 
         .modal-content {
@@ -358,6 +360,48 @@
         .modal-detail span {
             color: var(--netflix-gray);
             margin-right: 5px;
+        }
+
+        /* Certificate Modal */
+        .certificate-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .certificate-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .certificate-modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .certificate-modal-close {
+            position: absolute;
+            top: -40px;
+            right: -10px;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
         }
 
         /* Skills Modal Specific Styles */
@@ -453,6 +497,10 @@
             
             .modal-content {
                 width: 95%;
+            }
+
+            .certificate-modal-content {
+                max-width: 95%;
             }
         }
         #downloadCV{
@@ -628,26 +676,26 @@
     </section>
 
     <!-- Certificates -->
-     <section class="content-section" id="projects">
+     <section class="content-section" id="certificates">
         <h2 class="section-title">Certificates</h2>
         <div class="row">
             <div class="slider">
-                <div class="slider-item" data-id="13">
-                    <a href="Certificates/WebDevelopment.jpg"><img src="Certificates/Full-Stack.jpg" alt="Full-Stack Web Development"></a>
+                <div class="slider-item certificate-item" data-certificate="Certificates/WebDevelopment.jpg">
+                    <img src="Certificates/Full-Stack.jpg" alt="Full-Stack Web Development">
                     <div class="slider-item-content">
                         <div class="slider-item-title">Full-Stack Web Development</div>
                         <div class="slider-item-desc">UDEMY</div>
                     </div>
                 </div>
-                <div class="slider-item" data-id="2">
-                    <a href="Certificates/GCP.png"><img src="Certificates/GCP.jpg" alt="GCP-ACE"></a>
+                <div class="slider-item certificate-item" data-certificate="Certificates/GCP.png">
+                    <img src="Certificates/GCP.jpg" alt="GCP-ACE">
                     <div class="slider-item-content">
                         <div class="slider-item-title">Associate Cloud Engineer</div>
                         <div class="slider-item-desc">Google Cloud Platform</div>
                     </div>
                 </div>
-                <div class="slider-item" data-id="3">
-                    <a href="Certificates/Unix.jpg"><img src="Certificates/Unix1.jpg" alt="Unix"></a>
+                <div class="slider-item certificate-item" data-certificate="Certificates/Unix.jpg">
+                    <img src="Certificates/Unix1.jpg" alt="Unix">
                     <div class="slider-item-content">
                         <div class="slider-item-title">Unix</div>
                         <div class="slider-item-desc">UDEMY</div>
@@ -706,6 +754,16 @@
         </div>
     </div>
 
+    <!-- Certificate Modal -->
+    <div class="certificate-modal" id="certificateModal">
+        <div class="certificate-modal-content">
+            <button class="certificate-modal-close" id="certificateModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="" alt="Certificate" id="certificateImage">
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="social-icons">
@@ -713,11 +771,9 @@
             <a href="https://www.linkedin.com/in/mahantesh-pujari-a287771a5"><i class="fab fa-linkedin"></i></a>
             <a href="mailto:connectwithmahan@gmail.com"><i class="fas fa-envelope"></i></a>
             <a href="https://www.instagram.com/mandy._24"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/qr/NOOQ6ZZRITKJJ1"><i class="fab fa-whatsapp"></i></a>
         </div>
         <div class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
-            <a href="#">Help Center</a>
             <a href="#">Contact Me</a>
         </div>
         <p class="copyright">© 2025 Mahantesh Pujari Portfolio. All rights reserved.</p>
@@ -744,6 +800,12 @@
         const skillsTitle = document.getElementById('skillsTitle');
         const skillsDesc = document.getElementById('skillsDesc');
         const skillsPoints = document.getElementById('skillsPoints');
+        
+        // Certificate Modal Elements
+        const certificateModal = document.getElementById('certificateModal');
+        const certificateModalClose = document.getElementById('certificateModalClose');
+        const certificateImage = document.getElementById('certificateImage');
+        const certificateItems = document.querySelectorAll('.certificate-item');
         
         // Project data
         const projectData = {
@@ -897,6 +959,17 @@
             });
         });
         
+        // Certificate modal functionality
+        certificateItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const certificatePath = item.getAttribute('data-certificate');
+                certificateImage.src = certificatePath;
+                certificateModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
         // Close modals
         modalClose.addEventListener('click', () => {
             modal.style.display = 'none';
@@ -908,6 +981,11 @@
             document.body.style.overflow = 'auto';
         });
         
+        certificateModalClose.addEventListener('click', () => {
+            certificateModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
         // Close modals when clicking outside
         window.addEventListener('click', (e) => {
             if (e.target === modal) {
@@ -916,6 +994,10 @@
             }
             if (e.target === skillsModal) {
                 skillsModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            if (e.target === certificateModal) {
+                certificateModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         });
