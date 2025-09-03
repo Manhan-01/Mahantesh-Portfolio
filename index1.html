@@ -572,10 +572,10 @@
             
             <!-- Dropdown Menu -->
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="profile.html">Profile</a>
-                <a href="#">Option 1</a>
-                <a href="#">Option 2</a>
-                <a href="#">Option 3</a>
+                <a href="profile.html">Profiles</a>
+                <a href="about.html">About Me</a>
+                <!-- <a href="#">Option 2</a>
+                <a href="#">Option 3</a> -->
             </div>
         </div>
     </header>
@@ -706,7 +706,7 @@
                     <img src="Images/Gym.jpg" alt="Exercise">
                     <div class="slider-item-content">
                         <div class="slider-item-title">Exercise</div>
-                        <div class="slider-item-desc">Running, Gym, Physical Exercise</div>
+                        <!-- <div class="slider-item-desc">Running, Gym, Physical Exercise</div> -->
                     </div>
                 </div>
             </div>
@@ -821,6 +821,15 @@
         <p class="copyright">© 2025 Mahantesh Pujari Portfolio. All rights reserved.</p>
     </footer>
 
+    <!-- Audio elements for hover sounds -->
+    <audio id="hoverSound" preload="auto">
+        <source src="Images/glitch.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="netflix-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-cinematic-magic-sweep-747.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
         // DOM Elements
         const header = document.querySelector('header');
@@ -852,6 +861,10 @@
         // Dropdown Elements
         const menuToggle = document.getElementById('menuToggle');
         const dropdownMenu = document.getElementById('dropdownMenu');
+        
+        // Audio Elements
+        const hoverSound = document.getElementById('hoverSound');
+        const netflixSound = document.getElementById('netflix-sound');
         
         // Project data
         const projectData = {
@@ -959,8 +972,24 @@
             });
         });
         
-        // Open modal on slider item click
+        // Hover sound effect for slider items
         sliderItems.forEach(item => {
+            let canPlaySound = true;
+            
+            item.addEventListener('mouseenter', () => {
+                if (canPlaySound) {
+                    hoverSound.currentTime = 0;
+                    hoverSound.volume = 0.3;
+                    hoverSound.play().catch(e => console.log("Audio play failed:", e));
+                    canPlaySound = false;
+                    
+                    // Re-enable sound after a short delay to prevent spamming
+                    setTimeout(() => {
+                        canPlaySound = true;
+                    }, 300);
+                }
+            });
+            
             item.addEventListener('click', () => {
                 const id = item.getAttribute('data-id');
                 const type = item.getAttribute('data-type');
@@ -1092,7 +1121,13 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-        })
+        });
+        
+        // Play the Netflix sound after a short delay
+        setTimeout(() => {
+            netflixSound.volume = 0.5;
+            netflixSound.play().catch(e => console.log("Netflix sound play failed:", e));
+        }, 500);
     </script>
 </body>
 </html>
