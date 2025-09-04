@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mandy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/jpg" href="Images/favicon2.png">
-    
     <style>
         /* Preloader Styles */
         #preloader {
@@ -15,9 +13,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--netflix-black);
+            background-color: #141414;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
@@ -37,7 +34,7 @@
         .netflix-loader:after {
             content: "";
             position: absolute;
-            background: var(--netflix-red);
+            background: #e50914;
             width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -60,10 +57,12 @@
         }
         
         .loader-text {
-            color: var(--netflix-white);
+            color: #fff;
             margin-top: 80px;
             font-size: 16px;
             letter-spacing: 2px;
+            position: absolute;
+            top: 60px;
         }
 
         /* Original Styles */
@@ -73,536 +72,158 @@
             box-sizing: border-box;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
-
-        :root {
-            --netflix-red: #e50914;
-            --netflix-black: #141414;
-            --netflix-dark: #181818;
-            --netflix-gray: #808080;
-            --netflix-white: #ffffff;
-        }
-
+        
         body {
-            background-color: var(--netflix-black);
-            color: var(--netflix-white);
-            overflow-x: hidden;
-        }
-
-        /* Header & Navigation */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
-            transition: background-color 0.3s;
-        }
-
-        header.scrolled {
-            background-color: var(--netflix-black);
-        }
-
-        .logo {
-            color: var(--netflix-red);
-            font-size: 28px;
-            font-weight: bold;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            font-family: Arial, sans-serif;
-        }
-
-        .logo span {
-            margin-left: 5px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 20px;
-        }
-
-        nav ul li a {
-            color: var(--netflix-white);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover,
-        nav ul li a.active {
-            color: var(--netflix-red);
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-
-        .search-icon, .menu-icon {
-            color: var(--netflix-white);
-            font-size: 18px;
-            margin-left: 20px;
-            cursor: pointer;
-        }
-
-        /* Dropdown Menu */
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: var(--netflix-black);
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1001;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .dropdown-menu.show {
-            display: block;
-        }
-
-        .dropdown-menu a {
-            color: var(--netflix-white);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 14px;
-            transition: background-color 0.3s;
-        }
-
-        .dropdown-menu a:hover {
-            background-color: var(--netflix-red);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 80vh;
-            background: 
-                linear-gradient(to top, var(--netflix-black) 0%, transparent 50%),
-                linear-gradient(to bottom, var(--netflix-black) 0%, transparent 5%),
-                linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                url('Images/Me.jpg') no-repeat center center/cover;
-            display: flex;
-            align-items: center;
-            padding: 0 60px;
-            position: relative;
-        }
-
-        .hero-content {
-            margin-top: 25%;
-            max-width: 600px;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .hero-badge {
-            background-color: var(--netflix-red);
+            background-color: #141414;
             color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .hero-title {
-            font-size: 36px;
-            margin-bottom: 15px;
-        }
-
-        .hero-desc {
-            font-size: 14px;
-            margin-bottom: 20px;
-            color: #e6e6e6;
-            line-height: 1.5;
-        }
-
-        .hero-buttons {
             display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
+            flex-direction: column;
             align-items: center;
-            transition: all 0.3s;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in forwards;
+            animation-delay: 0.5s;
         }
-
-        .btn-primary {
-            background-color: var(--netflix-white);
-            color: var(--netflix-black);
-            border: none;
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-
-        .btn-primary:hover {
-            background-color: rgba(255, 255, 255, 0.75);
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
         }
-
-        .btn-secondary {
-            background-color: rgba(109, 109, 110, 0.7);
-            color: var(--netflix-white);
-            border: none;
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 500;
+            margin-bottom: 50px;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 0.5s ease-out forwards;
+            animation-delay: 0.8s;
         }
-
-        .btn-secondary:hover {
-            background-color: rgba(109, 109, 110, 0.5);
-        }
-
-        .btn i {
-            margin-right: 8px;
-        }
-
-        /* Content Rows */
-        .content-section {
-            padding: 40px 0;
-        }
-
-        .section-title {
-            font-size: 20px;
-            margin-bottom: 15px;
-            padding: 0 40px;
-        }
-
-        .row {
-            position: relative;
-        }
-
-        .slider {
+        
+        .profiles-container {
             display: flex;
-            padding: 0 40px;
-            gap: 10px;
-            overflow-x: auto;
-            scrollbar-width: none;
-            scroll-behavior: smooth;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 0.5s ease-out forwards;
+            animation-delay: 1s;
         }
-
-        .slider::-webkit-scrollbar {
-            display: none;
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-
-        .slider-item {
-            flex: 0 0 auto;
-            width: 250px;
+        
+        .profile {
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 180px;
+        }
+        
+        .profile:hover {
+            transform: scale(1.05);
+        }
+        
+        .profile-image {
+            width: 150px;
             height: 150px;
             border-radius: 4px;
+            margin: 0 auto 15px;
             overflow: hidden;
-            position: relative;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-        }
-
-        .slider-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            z-index: 100;
-        }
-
-        .slider-item img {
-            width: 100%;
-            height: 100%;
+            border: 3px solid transparent;
             object-fit: cover;
         }
-
-        .slider-item-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 10px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
+        
+        .profile:hover .profile-image {
+            border-color: white;
         }
-
-        .slider-item:hover .slider-item-content {
-            opacity: 1;
+        
+        .profile-name {
+            color: #808080;
+            font-size: 1.4rem;
         }
-
-        .slider-item-title {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .slider-item-desc {
-            font-size: 12px;
-            color: #d2d2d2;
-        }
-
-        .slider-controls {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            pointer-events: none;
-        }
-
-        .slider-btn {
-            background-color: rgba(0, 0, 0, 0.5);
+        
+        .profile:hover .profile-name {
             color: white;
-            border: none;
-            width: 40px;
-            height: 100%;
-            font-size: 20px;
+        }
+        
+        .add-profile {
             cursor: pointer;
-            pointer-events: auto;
-            transition: background-color 0.3s;
-            z-index: 10;
         }
-
-        .slider-btn:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            overflow-y: auto;
-            justify-content: center;
+        
+        .add-icon {
+            width: 150px;
+            height: 150px;
+            border-radius: 4px;
+            margin: 0 auto 15px;
+            background-color: #2f2f2f;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            color: #808080;
+            border: 3px solid transparent;
         }
-
-        .modal-content {
-            background-color: var(--netflix-dark);
-            margin: 50px auto;
-            max-width: 800px;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
+        
+        .add-profile:hover .add-icon {
+            border-color: #808080;
             color: white;
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 16px;
+            background-color: #3f3f3f;
+        }
+        
+        .manage-button {
+            margin-top: 40px;
+            padding: 12px 30px;
+            background-color: transparent;
+            color: #808080;
+            border: 1px solid #808080;
+            font-size: 1.2rem;
             cursor: pointer;
-            z-index: 10;
+            transition: all 0.2s;
         }
-
-        .modal-header {
-            position: relative;
-            height: 350px;
-        }
-
-        .modal-header img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        .modal-title {
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-
-        .modal-desc {
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            color: #d2d2d2;
-        }
-
-        .modal-details {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .modal-detail {
-            font-size: 14px;
-        }
-
-        .modal-detail span {
-            color: var(--netflix-gray);
-            margin-right: 5px;
-        }
-
-        /* Certificate Modal */
-        .certificate-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .certificate-modal-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-        }
-
-        .certificate-modal-content img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        .certificate-modal-close {
-            position: absolute;
-            top: -40px;
-            right: -10px;
+        
+        .manage-button:hover {
             color: white;
-            background: rgba(0, 0, 0, 0.7);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 10;
+            border-color: white;
         }
-
-        /* Skills Modal Specific Styles */
-        .skills-list {
-            margin-top: 20px;
-            padding-left: 20px;
-        }
-
-        .skills-list li {
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-
-        /* Footer */
-        footer {
-            padding: 40px;
-            text-align: center;
-            color: var(--netflix-gray);
-            border-top: 1px solid #333;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .social-icons a {
-            color: var(--netflix-gray);
-            font-size: 20px;
-            transition: color 0.3s;
-        }
-
-        .social-icons a:hover {
-            color: var(--netflix-white);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .footer-links a {
-            color: var(--netflix-gray);
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-
-        .copyright {
-            font-size: 12px;
-        }
-
-        /* Responsive */
+        
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            header {
-                padding: 15px 20px;
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 30px;
             }
             
-            nav ul {
-                display: none;
-            }
-            
-            .hero {
-                padding: 0 20px;
-                text-align: center;
-                justify-content: center;
-            }
-            
-            .hero-title {
-                font-size: 32px;
-            }
-            
-            .hero-desc {
-                font-size: 16px;
-            }
-            
-            .section-title, .slider {
-                padding: 0 20px;
-            }
-            
-            .slider-item {
-                width: 200px;
+            .profile-image, .add-icon {
+                width: 120px;
                 height: 120px;
             }
             
-            .modal-content {
-                width: 95%;
-            }
-
-            .certificate-modal-content {
-                max-width: 95%;
+            .profile-name {
+                font-size: 1.2rem;
             }
             
             .loader-text {
                 font-size: 14px;
             }
-        }
-        #downloadCV{
-            text-decoration: none;
-            color: white;
         }
     </style>
 </head>
@@ -610,286 +231,37 @@
     <!-- Preloader -->
     <div id="preloader">
         <div class="netflix-loader"></div>
-        <div class="loader-text">Loading Portfolio...</div>
+        <div class="loader-text">Loading Profiles...</div>
     </div>
 
-    <!-- Header & Navigation -->
-    <header>
-        <a href="#" class="logo">
-            <!-- <i class="fas fa-play-circle"></i> -->
-            <span>MANDY</span>
-        </a>
+    <!-- Original Content -->
+    <div class="container">
+        <h1>Who's watching?</h1>
         
-        <nav>
-            <ul>
-                <li><a href=".hero" class="active">Home</a></li>
-                <li><a href="#projects">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#hobbies">Hobbies</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-        </nav>
-        
-        
-        <div class="nav-right">
-            <!-- <div class="search-icon">
-                <i class="fas fa-search"></i>
-            </div> -->
-            <div class="menu-icon" id="menuToggle">
-                <i class="fas fa-bars"></i>
+        <div class="profiles-container">
+            <div class="profile">
+                <a href="main.html"><img src="Images/HR.png" alt="HR" class="profile-image"></a>
+                <div class="profile-name">HR</div>
             </div>
             
-            <!-- Dropdown Menu -->
-            <div class="dropdown-menu" id="dropdownMenu">
-                <a href="profile.html">Profiles</a>
-                <a href="about.html">About Me</a>
-                <!-- <a href="#">Option 2</a>
-                <a href="#">Option 3</a> -->
+            <div class="profile">
+                <a href="main.html"><img src="Images/Recruiter.jpg" alt="CEO" class="profile-image"></a>
+                <div class="profile-name">CEO</div>
+            </div>
+            
+            <div class="profile">
+                <a href="main.html"><img src="Images/Guest1.jpg" alt="Guest" class="profile-image"></a>
+                <div class="profile-name">Guest</div>
+            </div>
+            
+            <div class="profile">
+                <a href="main.html"><img src="Images/Mandy.png" alt="Mandy" class="profile-image"></a>
+                <div class="profile-name">Mandy</div>
             </div>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">SOFTWARE ENGINEER</div>
-            <h1 class="hero-title">MAHANTESH PUJARI</h1>
-            <p class="hero-desc">Software Engineer with 3+ years of experience in full-stack development and maintaining scalable applications. Proficient in JavaScript, Python, HTML, CSS, and database management. Passionate about creating responsive web applications and optimizing system performance. Strong background in server management, production support, and cross-functional collaboration to deliver high-quality software solutions.</p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary">
-                    <i class="fas fa-play"></i> View Intro
-                </button>
-                <button class="btn btn-secondary">
-                    <!-- <i class="fas fa-info-circle"></i> More Info -->
-                     <i class="fas fa-info-circle" id="downloadCV"></i><a href="myResume.pdf" target="_blank" download id="downloadCV">Download CV</a> 
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="content-section" id="projects">
-        <h2 class="section-title">Work Experience</h2>
-        <div class="row">
-            <div class="slider">
-                <div class="slider-item" data-id="1">
-                    <img src="Images/Wipro.jpg" alt="Wipro">
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Wipro Ltd</div>
-                        <div class="slider-item-desc">Wipro</div>
-                    </div>
-                </div>
-                <div class="slider-item" data-id="2">
-                    <img src="Images/Lloyds.png" alt="Lloyds Banking Group">
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Lloyds Banking Group</div>
-                        <div class="slider-item-desc">Wipro's client</div>
-                    </div>
-                </div>
-                <div class="slider-item" data-id="3">
-                    <img src="Images/Question.jpg" alt="Finance Dashboard">
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Next ???</div>
-                        <div class="slider-item-desc"></div>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="slider-controls">
-                <button class="slider-btn left-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="slider-btn right-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- skills Section -->
-    <section class="content-section" id="skills">
-        <h2 class="section-title">Skills</h2>
-        <div class="row">
-            <div class="slider">
-                <div class="slider-item" data-id="6" data-type="skill">
-                    <img src="Images/frontend.avif" alt="Tech Company">
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Frontend Development</div>
-                        <div class="slider-item-desc">HTML5, CSS3, JavaScript, React</div>
-                    </div>
-                </div>
-                <div class="slider-item" data-id="7" data-type="skill">
-                    <img src="Images/Backend.jpg" alt="Backend">
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Backend Development</div>
-                        <div class="slider-item-desc">Python, PHP, Node.js</div>
-                    </div>
-                </div>
-                <div class="slider-item" data-id="8" data-type="skill">
-                    <img src="Images/Git.jpg" alt="GitHUB">
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">GitHub</div>
-                        <div class="slider-item-desc"></div>
-                    </div>
-                </div>
-                <div class="slider-item" data-id="9" data-type="skill">
-                    <img src="Images/OS.png" alt="Linux">
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Operating System</div>
-                        <div class="slider-item-desc">Windows, MacOS, Linux</div>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="slider-controls">
-                <button class="slider-btn left-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="slider-btn right-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </section>
-
-        <!-- Hobbies Section -->
-    <section class="content-section" id="hobbies">
-        <h2 class="section-title">Hobbies</h2>
-        <div class="row">
-            <div class="slider">
-                <div class="slider-item" data-id="10">
-                    <a href="Books.html"><img src="Images/Books.jpg" alt="Books"></a>
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Reading</div>
-                        <div class="slider-item-desc">Self-Help, Novels, Articles</div>
-                    </div>
-                </div>
-                <div class="slider-item" data-id="11">
-                    <a href="Traveller.html"><img src="Images/Travel.avif" alt="Traveller"></a>
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Traveller</div>
-                        <div class="slider-item-desc">Mountains,Beaches,Castles,Museums,etc</div>
-                    </div>
-                </div>
-                <div class="slider-item" data-id="12">
-                    <a href="Photography.html"><img src="Images/Photography1.jpg" alt="Photography"></a>
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Mobile Photography</div>
-                        <div class="slider-item-desc">Photography, Videography</div>
-                    </div>
-                </div>
-                <div class="slider-item" data-id="13">
-                    <img src="Images/Gym.jpg" alt="Exercise">
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Exercise</div>
-                        <!-- <div class="slider-item-desc">Running, Gym, Physical Exercise</div> -->
-                    </div>
-                </div>
-            </div>
-            <div class="slider-controls">
-                <button class="slider-btn left-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="slider-btn right-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certificates -->
-     <section class="content-section" id="certificates">
-        <h2 class="section-title">Certificates</h2>
-        <div class="row">
-            <div class="slider">
-                <div class="slider-item certificate-item" data-certificate="Certificates/WebDevelopment.jpg">
-                    <img src="Images/WebDevelopment.jpg" alt="Full-Stack Web Development">
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Full-Stack Web Development</div>
-                        <div class="slider-item-desc">UDEMY</div>
-                    </div>
-                </div>
-                <div class="slider-item certificate-item" data-certificate="Certificates/GCP.png">
-                    <img src="Certificates/GCP.jpg" alt="GCP-ACE">
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Associate Cloud Engineer</div>
-                        <div class="slider-item-desc">Google Cloud Platform</div>
-                    </div>
-                </div>
-                <div class="slider-item certificate-item" data-certificate="Certificates/Unix.jpg">
-                    <img src="Certificates/Unix1.jpg" alt="Unix">
-                    <div class="slider-item-content">
-                        <div class="slider-item-title">Unix</div>
-                        <div class="slider-item-desc">UDEMY</div>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="slider-controls">
-                <button class="slider-btn left-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="slider-btn right-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modal -->
-    <div class="modal" id="projectModal">
-        <div class="modal-content">
-            <button class="modal-close" id="modalClose">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="modal-header">
-                <img src="" alt="Project Image" id="modalImage">
-            </div>
-            <div class="modal-body">
-                <h2 class="modal-title" id="modalTitle">Project Title</h2>
-                <p class="modal-desc" id="modalDesc">Project description will go here. This will include details about the project, technologies used, challenges faced, and outcomes achieved.</p>
-                <div class="modal-details">
-                    <div class="modal-detail"><span>Client:</span> <span id="modalClient">Client Name</span></div>
-                    <div class="modal-detail"><span>Start-Date:</span> <span id="modalSDate">January 2023</span></div>
-                    <div class="modal-detail"><span>End-Date:</span> <span id="modalEDate">January 2023</span></div>
-                    <div class="modal-detail"><span>Category:</span> <span id="modalCategory">Web Development</span></div>
-                </div>
-                <!-- <button class="btn btn-primary">
-                    <i class="fas fa-external-link-alt"></i> Visit Live Site
-                </button> -->
-            </div>
-        </div>
+        
+        <!-- <button class="manage-button">MANAGE PROFILES</button> -->
     </div>
-
-    <!-- Skills Modal -->
-    <div class="modal" id="skillsModal">
-        <div class="modal-content">
-            <button class="modal-close" id="skillsModalClose">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="modal-header">
-                <img src="" alt="Skill Image" id="skillsImage">
-            </div>
-            <div class="modal-body">
-                <h2 class="modal-title" id="skillsTitle">Skill Title</h2>
-                <p class="modal-desc" id="skillsDesc">Skill description will go here.</p>
-                <div id="skillsPoints">
-                    <!-- Skill points will be inserted here -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Certificate Modal -->
-    <div class="certificate-modal" id="certificateModal">
-        <div class="certificate-modal-content">
-            <button class="certificate-modal-close" id="certificateModalClose">
-                <i class="fas fa-times"></i>
-            </button>
-            <img src="" alt="Certificate" id="certificateImage">
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="social-icons">
-            <a href="https://github.com/Manhan-01"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/mahantesh-pujari-a287771a5"><i class="fab fa-linkedin"></i></a>
-            <a href="mailto:connectwithmahan@gmail.com"><i class="fas fa-envelope"></i></a>
-            <a href="https://www.instagram.com/mandy._24"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/qr/NOOQ6ZZRITKJJ1"><i class="fab fa-whatsapp"></i></a>
-        </div>
-        <div class="footer-links">
-            <a href="about.html">Contact Me</a>
-        </div>
-        <p class="copyright">© 2025 Mahantesh Pujari Portfolio. All rights reserved.</p>
-    </footer>
 
     <script>
         // Preloader functionality
@@ -903,276 +275,23 @@
             }, 1500); // Adjust timing as needed
         });
 
-        // DOM Elements
-        const header = document.querySelector('header');
-        const sliderItems = document.querySelectorAll('.slider-item');
-        const modal = document.getElementById('projectModal');
-        const modalClose = document.getElementById('modalClose');
-        const modalImage = document.getElementById('modalImage');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalDesc = document.getElementById('modalDesc');
-        const modalClient = document.getElementById('modalClient');
-        const modalSDate = document.getElementById('modalSDate');
-        const modalEDate = document.getElementById('modalEDate');
-        const modalCategory = document.getElementById('modalCategory');
-        
-        // Skills Modal Elements
-        const skillsModal = document.getElementById('skillsModal');
-        const skillsModalClose = document.getElementById('skillsModalClose');
-        const skillsImage = document.getElementById('skillsImage');
-        const skillsTitle = document.getElementById('skillsTitle');
-        const skillsDesc = document.getElementById('skillsDesc');
-        const skillsPoints = document.getElementById('skillsPoints');
-        
-        // Certificate Modal Elements
-        const certificateModal = document.getElementById('certificateModal');
-        const certificateModalClose = document.getElementById('certificateModalClose');
-        const certificateImage = document.getElementById('certificateImage');
-        const certificateItems = document.querySelectorAll('.certificate-item');
-        
-        // Dropdown Elements
-        const menuToggle = document.getElementById('menuToggle');
-        const dropdownMenu = document.getElementById('dropdownMenu');
-        
-        // Project data
-        const projectData = {
-            1: {
-                title: "Project Engineer | Bengaluru, India",
-                desc: "Full-Stack Developer specializing in building dynamic, responsive web applications from concept to deployment. Experienced in designing modern front-end interfaces with HTML, CSS, JavaScript, and Bootstrap, and engineering robust back-end systems with Node.js, Python, and MySQL. Focused on creating seamless user experiences and optimizing database performance for scalable, efficient applications.",
-                client: "Wipro",
-                sdate: "June 2022",
-                edate: "June 2023",
-                category: "Web Development",
-                image: "Images/ProjectEngineer.jpg"
-            },
-            2: {
-                title: "Production Support Engineer | London, UK",
-                desc: "Experienced Run Engineer providing critical 24/7 production support for Critical payment applications, including SWIFT, GTX, IPP, SIP GPP. Expertise encompasses the end-to-end payment lifecycle, ensuring the timely processing of transactions (CHAPS, BACS, Target2, etc) and deep proficiency in SWIFT messaging (MT/MX, FIN, FileAct). Leverages hands-on technical skills in Linux, IBM WebSphere MQ, Oracle SQL, and Bash scripting to perform root cause analysis, troubleshoot message flow issues, analyze server logs, and implement corrective actions to prevent downtime. Proven ability to manage Finastra integrations,  cross-functional teams to deliver robust solutions while adhering to ITIL processes for incident, problem, and change management via ServiceNow.",
-                client: "Lloyds Banking Group",
-                sdate: "June 2023",
-                edate: "Present",
-                category: "Production Support Engineer",
-                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-            },
-            3: {
-                title: "Your Next Great Hire? I Believe Soo...",
-                desc: "I am currently exploring new opportunities where I can apply my skills to meaningful challenges. I'm looking for a company that values innovation as much as I do—a place where we can mutually benefit from each other's excellence. If you're seeking a dedicated professional who can deliver exceptional results while fostering a positive team environment, then we might just be the perfect match. Let's connect and discuss how we can achieve great things together.",
-                client: "Searching ...",
-                sdate: "Predicting...",
-                edate: "Calculating...",
-                category:"Developer",
-                image: "Images/Loading.jpg"
-            }
-        };
-
-        // Skills data
-        const skillsData = {
-            6: {
-                title: "Frontend Development",
-                desc: "Experienced in creating responsive and interactive user interfaces using modern web technologies.",
-                image: "Images/frontend.avif",
-                points: [
-                    "Proficient in HTML5, CSS3, and JavaScript ",
-                    "Experience with React.js for building dynamic user interfaces",
-                    "Knowledge of responsive design principles and cross-browser compatibility",
-                    "Familiar with CSS frameworks like Bootstrap and preprocessors like SASS",
-                    
-                ]
-            },
-            7: {
-                title: "Backend Development",
-                desc: "Skilled in server-side programming and database management for building robust web applications.",
-                image: "Images/Backend.jpg",
-                points: [
-                    "Proficient in Python for backend development",
-                    "Experience with PHP and Node.js for server-side programming",
-                    "Database management with MySQL, MongoDB, and PostgreSQL",
-                    "API development and integration (REST, GraphQL)",
-                    "Understanding of server deployment and cloud services",
-                    "Developed and launched a static website for a local business, enhancing online presence and customer engagement."
-                ]
-            },
-            8: {
-                title: "GitHub",
-                desc: "",
-                image: "Images/Git.jpg",
-                points: [
-                    "Proficient in core Git version control concepts, including committing, pushing, and pulling code using GitHub as the remote repository.",
-                    "Experience in cloning repositories, creating and managing branches for feature development and bug fixes.",
-                    "Skilled in reviewing commit histories to understand code evolution and track changes.",
-                    "Familiar with creating and managing repositories (public and private) for project organization."
-                ]
-            },
-            9: {
-                title: "Operating Systems",
-                desc: "Experienced with various operating systems and their environments for development and production.",
-                image: "Images/Linux.png",
-                points: [
-                    "Proficient in multi-platform environments, including Windows, macOS, and Linux distributions such as Ubuntu and Kali Linux.",
-                    "Skilled in using virtualization software (e.g., VirtualBox, VMware) to create, manage, and run isolated virtual machines for testing and development.",
-                    "Experienced in Linux/Unix shell scripting (Bash) to automate routine tasks, streamline workflows, and improve system efficiency."
-                ]
-            },
-            
-        };
-        
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
-        // Slider navigation
-        document.querySelectorAll('.slider').forEach(slider => {
-            const leftBtn = slider.parentElement.querySelector('.left-btn');
-            const rightBtn = slider.parentElement.querySelector('.right-btn');
-            
-            leftBtn.addEventListener('click', () => {
-                slider.scrollBy({ left: -300, behavior: 'smooth' });
-            });
-            
-            rightBtn.addEventListener('click', () => {
-                slider.scrollBy({ left: 300, behavior: 'smooth' });
+        // Add click event to profiles
+        document.querySelectorAll('.profile').forEach(profile => {
+            profile.addEventListener('click', function() {
+                const name = this.querySelector('.profile-name').textContent;
+                // alert(`Profile "${name}" selected!`);
             });
         });
         
-        // Open modal on slider item click
-        sliderItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const id = item.getAttribute('data-id');
-                const type = item.getAttribute('data-type');
-                
-                if (type === 'skill' && skillsData[id]) {
-                    // Open skills modal
-                    const data = skillsData[id];
-                    skillsImage.src = data.image;
-                    skillsTitle.textContent = data.title;
-                    skillsDesc.textContent = data.desc;
-                    
-                    // Clear previous points
-                    skillsPoints.innerHTML = '';
-                    
-                    // Add skill points
-                    const pointsList = document.createElement('ul');
-                    pointsList.className = 'skills-list';
-                    
-                    data.points.forEach(point => {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = point;
-                        pointsList.appendChild(listItem);
-                    });
-                    
-                    skillsPoints.appendChild(pointsList);
-                    skillsModal.style.display = 'block';
-                    document.body.style.overflow = 'hidden';
-                }
-                else if (projectData[id]) {
-                    // Open project modal
-                    const data = projectData[id];
-                    modalImage.src = data.image;
-                    modalTitle.textContent = data.title;
-                    modalDesc.textContent = data.desc;
-                    modalClient.textContent = data.client;
-                    modalSDate.textContent = data.sdate;
-                    modalEDate.textContent = data.edate;
-                    modalCategory.textContent = data.category;
-                    modal.style.display = 'block';
-                    document.body.style.overflow = 'hidden';
-                }
-            });
+        // Add click event to "Add Profile"
+        document.querySelector('.add-profile').addEventListener('click', function() {
+            // alert('Add new profile feature would open here.');
         });
         
-        // Certificate modal functionality
-        certificateItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                const certificatePath = item.getAttribute('data-certificate');
-                certificateImage.src = certificatePath;
-                certificateModal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            });
+        // Add click event to manage button
+        document.querySelector('.manage-button').addEventListener('click', function() {
+            // alert('Manage profiles feature would open here.');
         });
-        
-        // Toggle dropdown menu
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            dropdownMenu.classList.toggle('show');
-        });
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.nav-right')) {
-                dropdownMenu.classList.remove('show');
-            }
-        });
-        
-        // Close modals
-        modalClose.addEventListener('click', () => {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-        
-        skillsModalClose.addEventListener('click', () => {
-            skillsModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-        
-        certificateModalClose.addEventListener('click', () => {
-            certificateModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-        
-        // Close modals when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-            if (e.target === skillsModal) {
-                skillsModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-            if (e.target === certificateModal) {
-                certificateModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                
-                // Only prevent default for anchor links (starting with #)
-                if (targetId.startsWith('#')) {
-                    e.preventDefault();
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-                // For external links (like about.html), allow default behavior
-            });
-        });
-
-        document.getElementById("downloadCV").addEventListener('click',function(){
-            const pdfFileName = 'myResume.pdf';
-
-            const link = document.createElement('a');
-            link.href = pdfFileName;
-            link.download = pdfFileName;
-
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        })
     </script>
 </body>
 </html>
